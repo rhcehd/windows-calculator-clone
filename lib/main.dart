@@ -88,6 +88,18 @@ class _MyHomePageState extends State<MyHomePage> {
         case 'M－':
         case 'MS':
         case 'Mˇ':
+        case '%'://todo: not implement yet
+          if(true)
+            break;
+          _usedPercent = true;
+          _calculate(_output.substring(0, _output.length - 1) + '*0.01*' + _input);
+          //num a = num.parse(_temp) * num.parse(_input) * 0.01;
+          //_input = a.toString();
+          if(_input.endsWith('.0')) {
+            _input = _input.substring(0, _input.length - 2);
+          }
+          _output += _input;
+          break;
 
         case 'CE':
           _a = '0';
