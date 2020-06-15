@@ -32,9 +32,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   static const platform = const MethodChannel('com.lhs94.calcflutter/calculate');
 
-  String _a = '0';
-  String _b = '';
-  String _c = '';
+  String _input = '0';
+  String _output = '';
+  String _temp = '';
   String _operation = '';
 
   Future<void> _calculate() async {
