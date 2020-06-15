@@ -1,21 +1,16 @@
 package com.lhs94.calcflutter
 
-import android.os.Bundle
-import android.os.PersistableBundle
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugins.GeneratedPluginRegistrant
 import org.mosdev.stringcalculator.StringCalculator
-import java.nio.ByteBuffer
 
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "com.lhs94.calcflutter/calculate"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
-
 
         GeneratedPluginRegistrant.registerWith(flutterEngine)
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
