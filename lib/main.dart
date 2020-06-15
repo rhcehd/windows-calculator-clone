@@ -37,46 +37,40 @@ class _MyHomePageState extends State<MyHomePage> {
   String _temp = '';
   String _operation = '';
 
-  Future<void> _calculate() async {
+  bool _initializeInput = false;
+  bool _usedPercent = false;
+
+  Future<void> _calculate(String s) async {
     dynamic res;
-    String temp = _b.replaceAll('×', '*').replaceAll('÷', '/');
-    //String temp = '123';
-    print('input : $temp');
-    if(temp.isEmpty) {
+    String arg = s.replaceAll('×', '*').replaceAll('÷', '/');
+    //String arg = '123';
+    print('calc_input : $arg');
+    if(arg.isEmpty) {
       print('empty!!');
       return;
     }
     try {
-      final dynamic result = await platform.invokeMethod('calculate', {'calc' : temp});
+      final dynamic result = await platform.invokeMethod('calculate', {'calc' : arg});
       res = result;
     } on PlatformException catch(e) {
       print(e.message);
     }
-    print('output : $res');
+    print('calc_output : $res');
     setState(() {
-      _a = res;
+      _input = res;
     });
   }
 
   bool _endsWithOperation(String s) {
-    bool result = false;
-    if(s.endsWith('+') || s.endsWith('-') || s.endsWith('÷') || s.endsWith('×') || s.endsWith('%'))
-      result = true;
-    return s.endsWith('+') || s.endsWith('-') || s.endsWith('÷') || s.endsWith('×') || s.endsWith('%') ? true : false;
+    return s.endsWith('+') || s.endsWith('-') || s.endsWith('÷') || s.endsWith('×') ? true : false;
   }
 
   bool _endsWithEqual(String s) {
-    bool result = false;
-    if(s.endsWith('='))
-      result = true;
     return s.endsWith('=') ? true : false;
   }
 
   bool _hasOperation(String s) {
-    bool result = false;
-    if(s.contains('+') || s.contains('-') || s.contains('÷') || s.contains('×') || s.contains('%'))
-      result = true;
-    return s.contains('+') || s.contains('-') || s.contains('÷') || s.contains('×') || s.contains('%') ? true : false;
+    return s.contains('+') || s.contains('-') || s.contains('÷') || s.contains('×') ? true : false;
   }
 
   void func(String d) {
@@ -102,29 +96,32 @@ class _MyHomePageState extends State<MyHomePage> {
           break;
 
         case 'CE':
-          _a = '0';
+          if(_endsWithEqual(_output)) {
+            _output = '';
+          }
+          _input = '0';
           break;
 
         case 'C':
-          _a = '0';
-          _b = '';
-          _c = '';
+          _input = '0';
+          _output = '';
+          _temp = '';
           _operation = '';
           break;
 
         case 'Back':
-          if(_endsWithEqual(_b)) {
-            if(_hasOperation(_b)) {
-              _b = '';
+          if(_endsWithEqual(_output)) {
+            if(_hasOperation(_output)) {
+              _output = '';
             }
             else {
               //do nothing
             }
             break;
           }
-          _a = _a.substring(0, _a.length - 1);
-          if(_a.length == 0) {
-            _a = '0';
+          _input = _input.substring(0, _input.length - 1);
+          if(_input.length == 0) {
+            _input = '0';
           }
           break;
 
@@ -133,41 +130,51 @@ class _MyHomePageState extends State<MyHomePage> {
         case '²√x':
           break;
 
-        case '%':
         case '÷':
         case '×':
         case '-':
         case '+':
-          if(_endsWithEqual(_b)) {
-            _b = '';
+          if(_temp.isEmpty) {
+            _temp = _input;
           }
-          if(_endsWithOperation(_b)) {
-            _b = _b.substring(0, _b.length - 1) + d;
+          if(_endsWithEqual(_output)) {
+            _output = '';
+          }
+          if(_endsWithOperation(_output)) {
+            _output = _output.substring(0, _output.length - 1) + d;
             break;
           }
+          _initializeInput = true;
 
           _operation = d;
 
-          _b = _b + _a;
-          _calculate();
-          _b += d;
+          _output = _output + _input;
+          _calculate(_output);
+          _output += d;
           break;
 
         case '=':
-          if(_c.isEmpty) {
-            _c = _a;
+          if(_usedPercent) {
+            _output = _output.substring(0, _output.length - _input.length);
+            _temp = _input;
+            _usedPercent = false;
           }
-          if(_endsWithEqual(_b) || _b.isEmpty) {
-            _b = _a;
+          if(_temp.isEmpty) {
+            _temp = _input;
           }
-          if(_hasOperation(_b)) {
-            _b += _a;
+          if(_endsWithEqual(_output) || _output.isEmpty) {
+            _output = _input;
+          }
+          if(_hasOperation(_output)) {
+            _output += _input;
           }
           else {
-            _b += _operation + _c;
+            _output += _operation + _temp;
           }
-          _calculate();
-          _b += '=';
+          _initializeInput = false;
+
+          _calculate(_output);
+          _output += '=';
           break;
 
         case '＋/－':
@@ -183,30 +190,33 @@ class _MyHomePageState extends State<MyHomePage> {
         case '8':
         case '9':
         case '0':
-          if(_endsWithEqual(_b)) {
-            _a = '';
-            _b = '';
+          if(_endsWithEqual(_output)) {
+            _input = '';
+            _output = '';
           }
-          if(_hasOperation(_b)) {
-            _a = '';
+          if(_initializeInput) {
+            _input = '';
+            _initializeInput = false;
           }
-          if(_a == '0' && d == '0') {
+          if(_input == '0' && d == '0') {
             //do nothing
             break;
           }
-          if(_a == '0')
-            _a = '';
+          if(_input == '0')
+            _input = '';
+          if(_temp.isNotEmpty) {
+            _temp = '';
+          }
 
-          _c = '';
-          _a += d;
+          _input += d;
           break;
 
         case '.':
-          if(_a.contains('.')) {
+          if(_input.contains('.')) {
             //do nothing
             break;
           }
-          _a += d;
+          _input += d;
           break;
       }
     });
@@ -234,7 +244,6 @@ class _MyHomePageState extends State<MyHomePage> {
           MaterialButton(
             onPressed: () {
               //do nothing
-              _calculate();
             },
             child: Icon(
               Icons.history,
@@ -249,10 +258,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             Text(
-                '$_b',
+                '$_output',
             ),
             Text(
-              '$_a',
+              '$_input',
               textAlign: TextAlign.right,
               textScaleFactor: 5.0,
             ),
