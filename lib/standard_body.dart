@@ -11,7 +11,7 @@ class StandardBodyState extends State<StandardBody> {
   static final Calculator _calc = Calculator();
   final EdgeInsets _padding = EdgeInsets.all(1.5);
 
-  Widget createBtn(String btnText, double btnWidth, double btnHeigth, Color btnColor) {
+  Widget createBtn(String btnText, double btnWidth, double btnHeigth, Color btnColor, {IconData icon}) {
     return Container(
       width: btnWidth,
       height: btnHeigth,
@@ -25,7 +25,7 @@ class StandardBodyState extends State<StandardBody> {
                 _calc.func(btnText);
               });
             },
-            child: Text(btnText),
+            child: icon == null ? Text(btnText) : Icon(icon),
           ),
         ),
       ),
@@ -104,7 +104,7 @@ class StandardBodyState extends State<StandardBody> {
                       createBtn('%', button_4_width, row_height, btnOperation),
                       createBtn('CE', button_4_width, row_height, btnOperation),
                       createBtn('C', button_4_width, row_height, btnOperation),
-                      createBtn('Back', button_4_width, row_height, btnOperation),
+                      createBtn('Back', button_4_width, row_height, btnOperation, icon: Icons.backspace),
                     ],
                   ),
 
