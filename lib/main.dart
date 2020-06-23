@@ -52,11 +52,14 @@ class _CalcMainState extends State<CalcMain> {
                     Container(
                       width: appBarHeight,
                       height: appBarHeight,
-                      child: IconButton(
-                        icon: Icon(Icons.menu),
-                        onPressed: () {
-                          print('i m pressed!');
-                        },
+                      child: Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          icon: Icon(Icons.menu),
+                          onPressed: () {
+                            print('i m pressed!');
+                          },
+                        ),
                       )
                     ),
                     Expanded(
@@ -71,11 +74,14 @@ class _CalcMainState extends State<CalcMain> {
                     Container(
                       width: appBarHeight,
                       height: appBarHeight,
-                      child: IconButton(
-                        icon: Icon(Icons.history),
-                        onPressed: () {
-                          print('i m pressed!!');
-                        },
+                      child: Material(
+                        color: Colors.transparent,
+                        child: IconButton(
+                          icon: Icon(Icons.history),
+                          onPressed: () {
+                            print('i m pressed!!');
+                          },
+                        ),
                       )
                     )
                   ],
