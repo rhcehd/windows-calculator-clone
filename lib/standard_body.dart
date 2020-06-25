@@ -1,3 +1,4 @@
+import 'package:calcflutter/calc_color.dart';
 import 'package:calcflutter/calculator.dart';
 import 'package:flutter/material.dart';
 
@@ -43,14 +44,8 @@ class StandardBodyState extends State<StandardBody> {
     double row_height = height / 11;
     double row_height2 = row_height * 0.6;
 
-    Color backGround = Color.fromARGB(255, 183, 183, 183);
-    Color btnNumber = Color.fromARGB(255, 241, 241, 241);
-    Color btnEqual = Color.fromARGB(255, 100, 158, 196);
-    Color btnMemory = Color.fromARGB(255, 183, 183, 183);
-    Color btnOperation = Color.fromARGB(255, 211, 211, 211);
-
     return Container(
-        color: backGround,
+        color: CalcColor.background,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -90,66 +85,66 @@ class StandardBodyState extends State<StandardBody> {
                 children: [
                   Row(
                     children: [
-                      createBtn('MC', button_6_width, row_height2, btnMemory),
-                      createBtn('MR', button_6_width, row_height2, btnMemory),
-                      createBtn('M＋', button_6_width, row_height2, btnMemory),
-                      createBtn('M－', button_6_width, row_height2, btnMemory),
-                      createBtn('MS', button_6_width, row_height2, btnMemory),
-                      createBtn('Mˇ', button_6_width, row_height2, btnMemory),
+                      createBtn('MC', button_6_width, row_height2, CalcColor.btnMemory),
+                      createBtn('MR', button_6_width, row_height2, CalcColor.btnMemory),
+                      createBtn('M＋', button_6_width, row_height2, CalcColor.btnMemory),
+                      createBtn('M－', button_6_width, row_height2, CalcColor.btnMemory),
+                      createBtn('MS', button_6_width, row_height2, CalcColor.btnMemory),
+                      createBtn('Mˇ', button_6_width, row_height2, CalcColor.btnMemory),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('%', button_4_width, row_height, btnOperation),
-                      createBtn('CE', button_4_width, row_height, btnOperation),
-                      createBtn('C', button_4_width, row_height, btnOperation),
-                      createBtn('Back', button_4_width, row_height, btnOperation, icon: Icons.backspace),
+                      createBtn('%', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('CE', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('C', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('Back', button_4_width, row_height, CalcColor.btnOperation, icon: Icons.backspace),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('1/x', button_4_width, row_height, btnOperation),
-                      createBtn('x²', button_4_width, row_height, btnOperation),
-                      createBtn('²√x', button_4_width, row_height, btnOperation),
-                      createBtn('÷', button_4_width, row_height, btnOperation),
+                      createBtn('1/x', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('x²', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('²√x', button_4_width, row_height, CalcColor.btnOperation),
+                      createBtn('÷', button_4_width, row_height, CalcColor.btnOperation),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('7', button_4_width, row_height, btnNumber),
-                      createBtn('8', button_4_width, row_height, btnNumber),
-                      createBtn('9', button_4_width, row_height, btnNumber),
-                      createBtn('×', button_4_width, row_height, btnOperation),
+                      createBtn('7', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('8', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('9', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('×', button_4_width, row_height, CalcColor.btnOperation),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('4', button_4_width, row_height, btnNumber),
-                      createBtn('5', button_4_width, row_height, btnNumber),
-                      createBtn('6', button_4_width, row_height, btnNumber),
-                      createBtn('-', button_4_width, row_height, btnOperation),
+                      createBtn('4', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('5', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('6', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('-', button_4_width, row_height, CalcColor.btnOperation),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('1', button_4_width, row_height, btnNumber),
-                      createBtn('2', button_4_width, row_height, btnNumber),
-                      createBtn('3', button_4_width, row_height, btnNumber),
-                      createBtn('+', button_4_width, row_height, btnOperation),
+                      createBtn('1', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('2', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('3', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('+', button_4_width, row_height, CalcColor.btnOperation),
                     ],
                   ),
 
                   Row(
                     children: [
-                      createBtn('＋/－', button_4_width, row_height, btnNumber),
-                      createBtn('0', button_4_width, row_height, btnNumber),
-                      createBtn('.', button_4_width, row_height, btnNumber),
-                      createBtn('=', button_4_width, row_height, btnEqual),
+                      createBtn('＋/－', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('0', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('.', button_4_width, row_height, CalcColor.btnNumber),
+                      createBtn('=', button_4_width, row_height, CalcColor.btnEqual),
                     ],
                   ),
 
