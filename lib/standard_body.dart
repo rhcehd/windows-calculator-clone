@@ -36,11 +36,11 @@ class StandardBodyState extends State<StandardBody> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double width = size.width - _padding.horizontal;
-    double heigth = size.height - _padding.vertical;
+    double height = size.height - _padding.vertical;
 
     double button_6_width = width / 6;
     double button_4_width = width / 4;
-    double row_height = heigth / 11;
+    double row_height = height / 11;
     double row_height2 = row_height * 0.6;
 
     Color backGround = Color.fromARGB(255, 183, 183, 183);
