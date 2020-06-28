@@ -1,6 +1,10 @@
+import 'package:calcflutter/standard_body.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
+import 'calc_color.dart';
+import 'calc_history.dart';
+
 
 void main() {
   runApp(MyApp());
