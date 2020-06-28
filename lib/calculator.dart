@@ -1,5 +1,7 @@
 import 'package:flutter/services.dart';
 
+import 'calc_history.dart';
+
 class Calculator {
 
   static const platform = const MethodChannel('com.lhs94.calcflutter/calculate');
@@ -148,6 +150,9 @@ class Calculator {
 
         _calculate(_output);
         _output += '=';
+
+        CalcHistory.add(_input, _output);
+
         break;
 
       case '＋/－':
