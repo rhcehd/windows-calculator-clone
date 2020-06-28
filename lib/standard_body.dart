@@ -9,7 +9,7 @@ class StandardBody extends StatefulWidget {
 
 class StandardBodyState extends State<StandardBody> {
 
-  static final Calculator _calc = Calculator();
+  final Calculator _calc = Calculator();
   final EdgeInsets _padding = EdgeInsets.all(1.5);
 
   Widget createBtn(String btnText, double btnWidth, double btnHeigth, Color btnColor, {IconData icon}) {
